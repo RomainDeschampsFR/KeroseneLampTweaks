@@ -1,11 +1,11 @@
 using MelonLoader;
 using System.Reflection;
-using System.Runtime.InteropServices;
+
 
 [assembly: AssemblyTitle("KeroseneLampTweaks")]
 [assembly: AssemblyCopyright("Created by Xpazeman")]
-[assembly: AssemblyVersion("2.3.0")]
-[assembly: AssemblyFileVersion("2.3.0")]
+[assembly: AssemblyVersion("2.4.0")]
+[assembly: AssemblyFileVersion("2.4.0")]
 
-[assembly: MelonInfo(typeof(KeroseneLampTweaks.KeroseneLampTweaks), "KeroseneLampTweaks", "2.3.0", "Xpazeman", null)]
+[assembly: MelonInfo(typeof(KeroseneLampTweaks.Main), "KeroseneLampTweaks", "2.4.0", "Romain, Xpazeman")]
 [assembly: MelonGame("Hinterland", "TheLongDark")]

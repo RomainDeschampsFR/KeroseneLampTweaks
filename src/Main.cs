@@ -1,12 +1,10 @@
-﻿using System.IO;
-using System.Reflection;
-using UnityEngine;
+﻿using UnityEngine;
 using MelonLoader;
-using Il2Cpp;
+
 
 namespace KeroseneLampTweaks
 {
-    class KeroseneLampTweaks : MelonMod
+    class Main : MelonMod
     {
         
         public override void OnInitializeMelon()
@@ -17,17 +15,17 @@ namespace KeroseneLampTweaks
         public static void ColorLamps(GameObject lamp)
         {
             
-            if (Settings.options.lampColor != LampColor.Default)
+            if (Settings.settings.lampColor != LampColor.Default)
             {
                 Color newColor;
 
-                if (lamp.name.Contains("Spelunkers") && Settings.options.spelunkerColor)
+                if (lamp.name.Contains("Spelunkers") && Settings.settings.spelunkerColor)
                 {
-                    newColor = GetNewColor(Settings.options.spelunkersLampColor, true);
+                    newColor = GetNewColor(Settings.settings.spelunkersLampColor, true);
                 }
                 else
                 {
-                    newColor = GetNewColor(Settings.options.lampColor);
+                    newColor = GetNewColor(Settings.settings.lampColor);
                 }
 
                 foreach (Light light in lamp.GetComponentsInChildren<Light>())
@@ -79,11 +77,11 @@ namespace KeroseneLampTweaks
                 case LampColor.Custom:
                     if (!isSpelunkers)
                     {
-                        newColor = new Color32((byte)Settings.options.lampColorR, (byte)Settings.options.lampColorG, (byte)Settings.options.lampColorB, 255);
+                        newColor = new Color32((byte)Settings.settings.lampColorR, (byte)Settings.settings.lampColorG, (byte)Settings.settings.lampColorB, 255);
                     }
                     else
                     {
-                        newColor = new Color32((byte)Settings.options.spelunkersLampColorR, (byte)Settings.options.spelunkersLampColorG, (byte)Settings.options.spelunkersLampColorB, 255);
+                        newColor = new Color32((byte)Settings.settings.spelunkersLampColorR, (byte)Settings.settings.spelunkersLampColorG, (byte)Settings.settings.spelunkersLampColorB, 255);
                     }
                     break;
             }

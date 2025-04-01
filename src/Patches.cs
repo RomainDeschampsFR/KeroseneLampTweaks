@@ -5,26 +5,42 @@ using Il2CppTLD.Gear;
 
 namespace KeroseneLampTweaks
 {
-    [HarmonyPatch(typeof(KeroseneLampItem), "ReduceFuel", new Type[] { typeof(float) })]
+    [HarmonyPatch(typeof(KeroseneLampItem), nameof(KeroseneLampItem.ReduceFuel), new Type[] { typeof(float) })]
     public class KeroseneLampItem_ReduceFuel
     {
         public static void Prefix(ref KeroseneLampItem __instance, ref float hoursBurned)
         {
             //var gi = Traverse.Create(__instance).Field("m_GearItem").GetValue<GearItem>();
             var gi = __instance.m_GearItem;
+            float penalty = 1f;
+
+            if (gi.CurrentHP < Settings.settings.conditionThreshold)
+            {
+                penalty += (1 - (gi.CurrentHP / Settings.settings.conditionThreshold)) * (Settings.settings.maxPenalty/100);
+            }
 
             if (!gi.m_InPlayerInventory)
             {
-                hoursBurned *= Settings.options.placed_burn_multiplier;
+                hoursBurned *= (Settings.settings.placed_burn_multiplier * penalty);
             }
             else
             {
-                hoursBurned *= Settings.options.held_burn_multiplier;
+                hoursBurned *= (Settings.settings.held_burn_multiplier * penalty);
             }
         }
     }
 
-    [HarmonyPatch(typeof(KeroseneLampItem), "Update")]
+    [HarmonyPatch(typeof(KeroseneLampItem), nameof(KeroseneLampItem.OnIgniteComplete))]
+    public class KeroseneLampItem_TurnOn
+    {
+        public static void Postfix(ref KeroseneLampItem __instance)
+        {
+            //decay on use
+            __instance.m_GearItem.m_CurrentHP -= Settings.settings.turnOnDecay;
+        }
+    }
+
+    [HarmonyPatch(typeof(KeroseneLampItem), nameof(KeroseneLampItem.Update))]
     public class KeroseneLampItem_Update
     {
         private const float INDOOR_DEF_RNG = 25f;
@@ -33,12 +49,15 @@ namespace KeroseneLampTweaks
 
         public static void Postfix(ref KeroseneLampItem __instance)
         {
+            //decay over time
+            if (__instance.IsOn()) __instance.m_GearItem.m_CurrentHP = Mathf.Max(0, __instance.m_GearItem.m_CurrentHP - Settings.settings.overTimeDecay * (Time.deltaTime/300) * (1/GameManager.GetTimeOfDayComponent().m_DayLengthScale));
+
             //var gi = Traverse.Create(__instance).Field("m_GearItem").GetValue<GearItem>();
             var gi = __instance.m_GearItem;
 
             if (!gi.m_InPlayerInventory)
             {
-                if (Settings.options.muteLamps)
+                if (Settings.settings.muteLamps)
                     __instance.StopLoopingAudio();
             }
 
@@ -46,14 +65,14 @@ namespace KeroseneLampTweaks
             Light indoorCore = __instance.m_LightIndoorCore;
             Light outdoor = __instance.m_LightOutdoor;
 
-            indoor.range = INDOOR_DEF_RNG * Settings.options.lamp_range;
-            indoorCore.range = INDOORCORE_DEF_RNG * Settings.options.lamp_range;
-            outdoor.range = OUTDOOR_DEF_RNG * Settings.options.lamp_range;
+            indoor.range = INDOOR_DEF_RNG * Settings.settings.lamp_range;
+            indoorCore.range = INDOORCORE_DEF_RNG * Settings.settings.lamp_range;
+            outdoor.range = OUTDOOR_DEF_RNG * Settings.settings.lamp_range;
         }
         
     }
 
-    [HarmonyPatch(typeof(FirstPersonLightSource), "TurnOnEffects")]
+    [HarmonyPatch(typeof(FirstPersonLightSource), nameof(FirstPersonLightSource.TurnOnEffects))]
     internal class FirstPersonLightSource_Start
     {
         private const float INDOOR_DEF_RNG = 25f;
@@ -64,28 +83,28 @@ namespace KeroseneLampTweaks
 
             if (__instance.gameObject.name.Contains("KerosceneLamp") || __instance.gameObject.name.Contains("KeroseneLamp"))
             {
-                __instance.m_LightIndoor.range = INDOOR_DEF_RNG * Settings.options.lamp_range;
-                __instance.m_LightOutdoor.range = OUTDOOR_DEF_RNG * Settings.options.lamp_range;
+                __instance.m_LightIndoor.range = INDOOR_DEF_RNG * Settings.settings.lamp_range;
+                __instance.m_LightOutdoor.range = OUTDOOR_DEF_RNG * Settings.settings.lamp_range;
 
-                KeroseneLampTweaks.ColorLamps(__instance.gameObject);
+                Main.ColorLamps(__instance.gameObject);
             }
         }
     }
 
-    [HarmonyPatch(typeof(KeroseneLampIntensity), "Update")]
+    [HarmonyPatch(typeof(KeroseneLampIntensity), nameof(KeroseneLampIntensity.Update))]
     internal class KeroseneLampIntensity_Update
     {
         public static void Prefix(KeroseneLampIntensity __instance)
         {
             Color newColor;
             
-            if (__instance.gameObject.name.Contains("Spelunkers") && Settings.options.spelunkerColor)
+            if (__instance.gameObject.name.Contains("Spelunkers") && Settings.settings.spelunkerColor)
             {
-                newColor = KeroseneLampTweaks.GetNewColor(Settings.options.spelunkersLampColor, true);
+                newColor = Main.GetNewColor(Settings.settings.spelunkersLampColor, true);
             }
             else
             {
-                newColor = KeroseneLampTweaks.GetNewColor(Settings.options.lampColor);
+                newColor = Main.GetNewColor(Settings.settings.lampColor);
             }
 
             Gradient gradient = new Gradient();
@@ -123,7 +142,7 @@ namespace KeroseneLampTweaks
             if (gi)
             {
                 keroseneLampItem = gi.m_KeroseneLampItem;
-                KeroseneLampTweaks.ColorLamps(keroseneLampItem.gameObject);
+                Main.ColorLamps(keroseneLampItem.gameObject);
             }
         }
     }
