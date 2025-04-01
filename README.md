@@ -11,7 +11,7 @@ Mod for The Long Dark to modify the rates of fuel consumption for kerosene lamps
 + **Rate of burn for placed lamps**: Modifier for the rate of consumption when the lamp is placed. 0 is no consumption, 1 is game default, 2 is double the consumption.
 + **Rate of burn for held lamps**: Modifier for the rate of consumption when the lamp is held/equipped. 0 is no consumption, 1 is game default, 2 is double the consumption.
 ### Burn rate penalty
-+ **Condition threshold**: There won't be any fuel consumption penalty for a lantern above this condition threshold.ption.
++ **Condition threshold**: There won't be any fuel consumption penalty for a lantern above this condition threshold.
 + **Max penalty**: Maximum fuel consumption penalty when lantern condition is (close to) 0%..
 *The penalty increases linearly between the condition threshold (no penalty) and 0% condition (full penalty).*
 ### Color & audio
