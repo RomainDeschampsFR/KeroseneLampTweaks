@@ -6,7 +6,7 @@ Mod for The Long Dark to modify the rates of fuel consumption for kerosene lamps
 ## SETTINGS
 ### Decay
 + **Decay when turning the lantern on**: Add a small condition loss when you switch the lantern on .
-+ **Decay over time while on (per hour)**: Add a small condition loss overtime when while the lantern is ON.
++ **Decay over time while on (per hour)**: Add a small condition loss overtime while the lantern is ON.
 ### Burn rate
 + **Rate of burn for placed lamps**: Modifier for the rate of consumption when the lamp is placed. 0 is no consumption, 1 is game default, 2 is double the consumption.
 + **Rate of burn for held lamps**: Modifier for the rate of consumption when the lamp is held/equipped. 0 is no consumption, 1 is game default, 2 is double the consumption.
