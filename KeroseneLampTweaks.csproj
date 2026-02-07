@@ -42,7 +42,7 @@
         </Reference>
     </ItemDefinitionGroup>
     <ItemGroup>
-      <PackageReference Include="STBlade.Modding.TLD.Il2CppAssemblies.Windows" Version="2.40.0" />
+      <PackageReference Include="STBlade.Modding.TLD.Il2CppAssemblies.Windows" Version="2.51.0" />
       <PackageReference Include="STBlade.Modding.TLD.ModSettings" Version="1.9.0" />
     </ItemGroup>
 
@@ -51,7 +51,6 @@
         <Reference Include="ModSettings" />
         <Reference Include="MelonLoader" />
         <Reference Include="0Harmony" />
-        <Reference Include="AssetRipper.VersionUtilities" />
         <Reference Include="AssetsTools.NET" />
         <Reference Include="Il2CppInterop.Common" />
         <Reference Include="Il2CppInterop.Runtime" />
@@ -68,7 +67,6 @@
         <Reference Include="Il2Cppcom.rlabrecque.steamworks.net" />
         <Reference Include="Il2CppDelaunayER" />
         <Reference Include="Il2CppEasyRoads3Dv3" />
-        <Reference Include="Il2CppGdkUtilities" />
         <Reference Include="Il2CppHOTween" />
         <Reference Include="Il2CppInfinityCode.MeshToTerrain.Runtime" />
         <Reference Include="Il2CppMegaWire.Runtime" />
@@ -117,7 +115,6 @@
         <Reference Include="Il2CppUniStorm.Runtime" />
         <Reference Include="Il2Cppuniumlib" />
         <Reference Include="Il2CppVolumetricObjects.Runtime" />
-        <Reference Include="Il2CppXGamingRuntime" />
         <Reference Include="Unity.Addressables" />
         <Reference Include="Unity.Analytics.DataPrivacy" />
         <Reference Include="Unity.Burst" />
@@ -135,8 +132,6 @@
         <Reference Include="UnityEngine.AssetBundleModule" />
         <Reference Include="UnityEngine.AudioModule" />
         <Reference Include="UnityEngine.ClothModule" />
-        <Reference Include="UnityEngine.ClusterInputModule" />
-        <Reference Include="UnityEngine.ClusterRendererModule" />
         <Reference Include="UnityEngine.CoreModule" />
         <Reference Include="UnityEngine.CrashReportingModule" />
         <Reference Include="UnityEngine.DirectorModule" />
@@ -152,12 +147,10 @@
         <Reference Include="UnityEngine.InputModule" />
         <Reference Include="UnityEngine.JSONSerializeModule" />
         <Reference Include="UnityEngine.LocalizationModule" />
-        <Reference Include="UnityEngine.NVIDIAModule" />
         <Reference Include="UnityEngine.ParticleSystemModule" />
         <Reference Include="UnityEngine.PerformanceReportingModule" />
         <Reference Include="UnityEngine.Physics2DModule" />
         <Reference Include="UnityEngine.PhysicsModule" />
-        <Reference Include="UnityEngine.ProfilerModule" />
         <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule" />
         <Reference Include="UnityEngine.ScreenCaptureModule" />
         <Reference Include="UnityEngine.SharedInternalsModule" />
@@ -175,10 +168,8 @@
         <Reference Include="UnityEngine.TLSModule" />
         <Reference Include="UnityEngine.UI" />
         <Reference Include="UnityEngine.UIElementsModule" />
-        <Reference Include="UnityEngine.UIElementsNativeModule" />
         <Reference Include="UnityEngine.UIModule" />
         <Reference Include="UnityEngine.UmbraModule" />
-        <Reference Include="UnityEngine.UNETModule" />
         <Reference Include="UnityEngine.UnityAnalyticsModule" />
         <Reference Include="UnityEngine.UnityConnectModule" />
         <Reference Include="UnityEngine.UnityCurlModule" />
@@ -191,7 +182,6 @@
         <Reference Include="UnityEngine.VehiclesModule" />
         <Reference Include="UnityEngine.VFXModule" />
         <Reference Include="UnityEngine.VideoModule" />
-        <Reference Include="UnityEngine.VirtualTexturingModule" />
         <Reference Include="UnityEngine.VRModule" />
         <Reference Include="UnityEngine.WindModule" />
         <Reference Include="UnityEngine.XRModule" />
